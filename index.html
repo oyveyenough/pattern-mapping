@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pattern Mapping Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--teal:#3D8F8F;--teal-dark:#2B6868;--teal-light:#EAF4F4;--teal-mid:#C2DEDE;
+--amber:#C9853D;--amber-light:#F6E8D5;--amber-mid:#E4C09A;
+--sky:#6BA0BE;--sky-light:#E4EFF7;
+--ink:#2B2B2B;--ink-soft:#4A4A4A;--ink-muted:#878787;
+--page:#F9F7F3;--warm:#F3EFE8;--border:#DDD8CF;--white:#FFFFFF;
+--serif:'Playfair Display',Georgia,serif;--sans:'Nunito',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--page);color:var(--ink);line-height:1.65;min-height:100vh}
+
+/* PROGRESS */
+.progress-wrap{position:fixed;top:0;left:0;right:0;height:4px;background:var(--border);z-index:100}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0%;transition:width .5s ease}
+
+/* LEARNING MODULE */
+.lm-hero{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--teal) 50%,var(--sky) 100%);color:var(--white);padding:72px 24px 64px;text-align:center}
+.lm-hero .eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber-mid);margin-bottom:20px}
+.lm-hero h1{font-family:var(--serif);font-size:clamp(32px,6vw,58px);font-weight:500;line-height:1.15;margin-bottom:16px}
+.lm-hero h1 em{font-style:italic;color:var(--amber-mid)}
+.lm-hero p{font-size:15px;font-weight:300;color:rgba(255,255,255,.82);max-width:480px;margin:0 auto 10px;line-height:1.75}
+.lm-hero .scroll-cue{margin-top:36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+.lm-section{padding:64px 24px;max-width:740px;margin:0 auto}
+.lm-section + .lm-section{border-top:1px solid var(--border)}
+.lm-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.lm-h2{font-family:var(--serif);font-size:clamp(24px,3.5vw,36px);font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.25}
+.lm-h2 em{font-style:italic;color:var(--teal-dark)}
+.lm-body{font-size:15px;color:var(--ink-soft);line-height:1.8;font-weight:400}
+.lm-body + .lm-body{margin-top:16px}
+.lm-pullquote{font-family:var(--serif);font-size:clamp(17px,2.5vw,22px);font-style:italic;color:var(--teal-dark);border-left:3px solid var(--teal);padding:16px 24px;margin:32px 0;background:var(--teal-light);border-radius:0 8px 8px 0;line-height:1.5}
+
+/* Framework cards */
+.framework-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px}
+.framework-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px 20px;text-align:center}
+.framework-card .fc-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:20px}
+.framework-card .fc-icon.teal{background:var(--teal-light)}
+.framework-card .fc-icon.amber{background:var(--amber-light)}
+.framework-card .fc-icon.sky{background:var(--sky-light)}
+.framework-card h3{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);margin-bottom:8px}
+.framework-card p{font-size:13px;color:var(--ink-muted);line-height:1.6}
+
+/* Formation steps */
+.formation-steps{margin-top:32px;display:flex;flex-direction:column;gap:0;position:relative}
+.fstep{display:flex;gap:18px;padding:0 0 28px;position:relative}
+.fstep:last-child{padding-bottom:0}
+.fstep::before{content:'';position:absolute;left:17px;top:38px;bottom:-6px;width:2px;background:var(--teal-mid)}
+.fstep:last-child::before{display:none}
+.fstep .fs-num{width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--teal);color:var(--white);font-family:var(--serif);font-size:16px;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:1}
+.fstep .fs-body h4{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--ink);margin-bottom:5px;line-height:1.3;padding-top:5px}
+.fstep .fs-body p{font-size:13.5px;color:var(--ink-muted);line-height:1.65}
+
+.lm-deep{background:var(--ink);color:var(--white);padding:40px 32px;border-radius:12px;margin-top:32px}
+.lm-deep p{font-size:15px;color:rgba(255,255,255,.8);line-height:1.8}
+
+/* Adult life rows */
+.adult-rows{margin-top:32px;display:flex;flex-direction:column;gap:16px}
+.adult-row{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 22px}
+.adult-row .ar-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.adult-row .ar-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--teal);color:var(--white);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.adult-row .ar-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--ink)}
+.adult-row .ar-sub{font-size:12px;color:var(--ink-muted);margin-bottom:10px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;background:var(--teal-light);color:var(--teal-dark);border:1px solid var(--teal-mid)}
+.tag.amber{background:var(--amber-light);color:var(--amber);border-color:var(--amber-mid)}
+.tag.sky{background:var(--sky-light);color:var(--sky);border-color:#B0CCE0}
+
+/* Reframe */
+.lm-reframe{background:var(--amber-light);border:1px solid var(--amber-mid);border-radius:12px;padding:36px 32px;margin-top:16px}
+.lm-reframe h3{font-family:var(--serif);font-size:clamp(18px,2.5vw,24px);font-weight:500;color:var(--ink);margin-bottom:16px;line-height:1.3}
+.lm-reframe h3 em{font-style:italic;color:var(--amber)}
+.lm-reframe p{font-size:14px;color:var(--ink-soft);line-height:1.8}
+.lm-reframe p + p{margin-top:12px}
+.lm-reframe .closing-line{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--amber);margin-top:20px}
+
+/* CTA */
+.lm-cta{padding:64px 24px;text-align:center;border-top:1px solid var(--border)}
+.lm-cta h2{font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);font-weight:500;color:var(--ink);margin-bottom:10px}
+.lm-cta p{font-size:14px;color:var(--ink-muted);margin-bottom:32px;font-weight:300}
+.btn-start{display:inline-block;background:var(--teal);color:var(--white);font-family:var(--sans);font-size:15px;font-weight:600;padding:18px 42px;border-radius:8px;border:none;cursor:pointer;transition:background .2s;letter-spacing:.3px}
+.btn-start:hover{background:var(--teal-dark)}
+
+/* PRIVACY */
+#privacySection{display:none;padding:0 24px 80px}
+.privacy-card{max-width:640px;margin:64px auto 0;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:44px 40px}
+.privacy-card .lock-icon{font-size:36px;margin-bottom:20px}
+.privacy-card h2{font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:500;color:var(--ink);margin-bottom:20px;line-height:1.3}
+.privacy-card p{font-size:15px;color:var(--ink-soft);line-height:1.8;margin-bottom:14px}
+.privacy-card p:last-of-type{margin-bottom:0}
+.privacy-card .privacy-highlight{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--teal-dark);margin:24px 0;padding:16px 20px;background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0}
+.privacy-btn-row{margin-top:36px;text-align:center}
+
+/* QUESTIONNAIRE */
+#questionnaireSection{display:none}
+.container{max-width:740px;margin:0 auto;padding:0 24px 80px}
+.section-card{display:none;animation:fadeUp .45s ease both}
+.section-card.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.section-header{padding:52px 0 36px;border-bottom:1px solid var(--border);margin-bottom:44px}
+.section-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.section-title{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.section-subline{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink-muted);margin-bottom:24px}
+.section-context{font-size:14px;font-weight:400;line-height:1.8;color:var(--ink-soft);padding:18px 22px;background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0}
+
+.reflection-block{margin-bottom:44px}
+.reflection-label{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--ink-soft);margin-bottom:10px;line-height:1.55}
+textarea{width:100%;min-height:100px;padding:14px 18px;font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ink);background:var(--white);border:1px solid var(--border);border-radius:8px;resize:vertical;outline:none;line-height:1.7;transition:border-color .2s}
+textarea:focus{border-color:var(--teal)}
+textarea::placeholder{color:var(--ink-muted);font-style:italic}
+
+hr.divider{border:none;border-top:1px solid var(--border);margin:44px 0}
+
+.question-block{margin-bottom:38px}
+.question-label{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);line-height:1.45;margin-bottom:5px}
+.question-sub{font-size:13px;font-weight:400;color:var(--ink-muted);margin-bottom:16px;line-height:1.6}
+.question-hint{display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+
+.options-grid{display:flex;flex-direction:column;gap:7px}
+.option-label{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .2s,background .2s;font-size:14px;font-weight:400;color:var(--ink-soft);line-height:1.5}
+.option-label:hover{border-color:var(--teal-mid);background:var(--teal-light)}
+.option-label.checked{border-color:var(--teal);background:var(--teal-light);color:var(--ink)}
+.option-label input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:18px;height:18px;min-width:18px;border:1.5px solid var(--border);border-radius:4px;background:var(--white);cursor:pointer;transition:all .15s;position:relative;top:1px}
+.option-label input[type="checkbox"]:checked{background:var(--teal);border-color:var(--teal)}
+.option-label input[type="checkbox"]:checked::after{content:'';position:absolute;left:4px;top:1px;width:6px;height:10px;border:2px solid white;border-top:none;border-left:none;transform:rotate(45deg);display:block}
+.other-wrap{margin-top:7px}
+.other-input{width:100%;padding:12px 16px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--white);border:1px solid var(--border);border-radius:8px;outline:none;transition:border-color .2s}
+.other-input:focus{border-color:var(--teal)}
+.other-input::placeholder{color:var(--ink-muted);font-style:italic}
+
+.pattern-bridge{background:var(--amber-light);border:1px solid var(--amber-mid);border-radius:10px;padding:28px 30px;margin:48px 0 40px}
+.pattern-bridge-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.pattern-bridge-intro{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink-soft);margin-bottom:20px;line-height:1.55}
+.bridge-question{margin-bottom:20px}
+.bridge-question:last-child{margin-bottom:0}
+.bridge-question p{font-size:14px;font-weight:500;color:var(--ink-soft);margin-bottom:8px;line-height:1.55}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;padding-top:40px;border-top:1px solid var(--border);gap:12px}
+.step-label{font-size:12px;color:var(--ink-muted);font-weight:400}
+.btn{font-family:var(--sans);font-size:13px;font-weight:600;padding:13px 26px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.btn-primary{background:var(--teal);color:var(--white)}
+.btn-primary:hover{background:var(--teal-dark)}
+.btn-back{background:transparent;color:var(--ink-muted);border:1px solid var(--border)}
+.btn-back:hover{border-color:var(--ink-muted);color:var(--ink)}
+.btn-submit{background:var(--amber);color:var(--white);padding:15px 34px;font-size:14px}
+.btn-submit:hover{background:#B8743A}
+.btn-submit:disabled{opacity:.55;cursor:not-allowed}
+
+#loadingState{display:none;text-align:center;padding:80px 24px}
+#loadingState.active{display:block}
+.spinner{width:42px;height:42px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 30px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-h{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--ink);margin-bottom:10px}
+.loading-p{font-size:14px;color:var(--ink-muted);font-weight:300}
+
+#resultsState{display:none;padding-bottom:80px}
+#resultsState.active{display:block}
+.results-header{padding:60px 0 44px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:52px}
+.results-header .eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.results-header h2{font-family:var(--serif);font-size:clamp(26px,4vw,38px);font-weight:500;color:var(--ink);margin-bottom:14px}
+.results-header p{font-size:14px;color:var(--ink-muted);font-weight:300;max-width:460px;margin:0 auto}
+
+.pattern-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:38px;margin-bottom:24px;position:relative;overflow:hidden}
+.pattern-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--teal),var(--amber))}
+.card-section-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.pattern-name{font-family:var(--serif);font-size:clamp(22px,3vw,32px);font-weight:500;color:var(--ink);margin-bottom:6px}
+.pattern-tagline{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--ink-muted);margin-bottom:30px;line-height:1.5}
+.result-field{margin-bottom:24px}
+.result-field-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.result-field-text{font-size:14px;color:var(--ink-soft);line-height:1.8;font-weight:400}
+.invitation-box{background:var(--teal-light);border-radius:8px;padding:20px 24px;border-left:3px solid var(--teal)}
+.invitation-box p{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--teal-dark);line-height:1.6}
+
+.synthesis-card{background:var(--teal-dark);border-radius:12px;padding:44px 38px;margin-top:44px}
+.synthesis-card .eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber-mid);margin-bottom:10px}
+.synthesis-card h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:400;color:var(--white);margin-bottom:34px;line-height:1.3}
+.syn-field{margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12)}
+.syn-field:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.syn-field-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber-mid);margin-bottom:10px}
+.syn-field-text{font-size:14px;color:rgba(255,255,255,.82);line-height:1.8;font-weight:300}
+.closing-truth{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--white);line-height:1.65}
+
+.save-notice{margin-top:36px;padding:20px 24px;background:var(--warm);border-radius:8px;border:1px solid var(--border);font-size:13px;color:var(--ink-muted);line-height:1.65}
+.save-notice strong{color:var(--ink-soft)}
+.error-box{display:none;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:18px 20px;margin-top:18px;font-size:14px;color:#991B1B;line-height:1.6}
+.error-box .retry-row{margin-top:14px}
+.error-box .btn-retry{background:#991B1B;color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;padding:10px 22px;border:none;border-radius:6px;cursor:pointer}
+
+/* FEEDBACK FORM */
+.feedback-card{margin-top:44px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:40px 36px}
+.feedback-card .eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.feedback-card h3{font-family:var(--serif);font-size:clamp(20px,3vw,26px);font-weight:500;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.feedback-card .fb-intro{font-size:14px;color:var(--ink-muted);margin-bottom:28px;line-height:1.7}
+.fb-q{margin-bottom:24px}
+.fb-q label{display:block;font-family:var(--serif);font-size:16px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.45}
+.fb-scale{display:flex;gap:8px;flex-wrap:wrap}
+.fb-scale .fb-opt{flex:1;min-width:60px;text-align:center;padding:10px 6px;border:1px solid var(--border);border-radius:7px;background:var(--white);font-size:13px;color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.fb-scale .fb-opt:hover{border-color:var(--teal-mid);background:var(--teal-light)}
+.fb-scale .fb-opt.selected{background:var(--teal);border-color:var(--teal);color:var(--white);font-weight:600}
+.fb-q textarea{min-height:80px}
+.fb-submit{background:var(--teal);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:600;padding:14px 30px;border:none;border-radius:7px;cursor:pointer;transition:background .2s;margin-top:8px}
+.fb-submit:hover{background:var(--teal-dark)}
+.fb-submit:disabled{opacity:.55;cursor:not-allowed}
+.fb-thanks{display:none;text-align:center;padding:24px 0 6px}
+.fb-thanks.show{display:block}
+.fb-thanks p{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--teal-dark)}
+
+@media(max-width:600px){
+  .pattern-card,.synthesis-card,.feedback-card{padding:26px 20px}
+  .nav-row{flex-direction:column-reverse;align-items:stretch;text-align:center}
+  .pattern-bridge{padding:22px 18px}
+  .privacy-card{padding:28px 22px}
+  .framework-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ===================== LEARNING MODULE ===================== -->
+<div id="learningModule">
+
+  <div class="lm-hero">
+    <div class="eyebrow">Before You Begin</div>
+    <h1>Why do we keep <em>repeating</em><br>the same patterns?</h1>
+    <p>A short read that changes what you see when you answer the questions ahead.</p>
+    <div class="scroll-cue">scroll to explore</div>
+  </div>
+
+  <!-- How it works -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">How This Works</div>
+    <h2 class="lm-h2">Here is the shape of it.</h2>
+    <p class="lm-body">First you read this short module. About five minutes. It gives you the lens you need to get something real out of what comes next.</p>
+    <p class="lm-body">Then you move through a questionnaire in six parts. When you finish, you receive a personalized result that names the pattern that formed in each part of your life, traces where it came from, and shows you how it may still be running today.</p>
+    <p class="lm-body">At the very end there are five short questions I ask everyone. Your honest answers are how I learn whether this work is doing what it is meant to do. Please do not skip them.</p>
+    <p class="lm-body">Start to finish, about fifteen minutes.</p>
+  </div>
+
+  <!-- The Big Idea -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">The Big Idea</div>
+    <h2 class="lm-h2">Most people think they react from <em>who they are now.</em></h2>
+    <p class="lm-body">Often we are reacting from conclusions we reached years ago, without realizing it. As children we did not just live through things. We interpreted them. We tried to figure out what each moment meant about us, about other people, and about what it took to be safe and loved.</p>
+    <div class="lm-pullquote">"A child has to make sense of the world with almost no experience to go on. So they fill in the gaps with answers of their own."</div>
+    <p class="lm-body">Those answers were the best a young mind could do at the time. The trouble is that they tend to be broad and absolute. Instead of reading one situation as one situation, a child reads it as a lesson about life itself. And that lesson quietly shapes the next twenty, thirty, forty years of relating.</p>
+  </div>
+
+  <!-- How patterns form -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">How Patterns Form</div>
+    <h2 class="lm-h2">It happens in <em>six quiet steps.</em></h2>
+    <p class="lm-body">Almost every pattern follows the same path. None of it is chosen on purpose. It builds in the background until it feels like simply the way things are.</p>
+    <div class="formation-steps">
+      <div class="fstep"><div class="fs-num">1</div><div class="fs-body"><h4>You had experiences</h4><p>Thousands of small moments with friends, family, and the people who mattered. They did not have to be dramatic. The everyday ones shape us most.</p></div></div>
+      <div class="fstep"><div class="fs-num">2</div><div class="fs-body"><h4>You made them mean something</h4><p>What does this mean about me? What do I have to do to stay safe, to be loved, to belong? A child needs answers, so a child creates them.</p></div></div>
+      <div class="fstep"><div class="fs-num">3</div><div class="fs-body"><h4>The meanings became beliefs</h4><p>I have to earn love. My needs are too much. I cannot rely on anyone. First they were conclusions. Then assumptions. Then they felt like simple truth.</p></div></div>
+      <div class="fstep"><div class="fs-num">4</div><div class="fs-body"><h4>The beliefs created strategies</h4><p>If you believed you had to earn love, you became accommodating. If mistakes felt dangerous, you became careful and perfect. These were smart moves, and they often worked.</p></div></div>
+      <div class="fstep"><div class="fs-num">5</div><div class="fs-body"><h4>The strategy became automatic</h4><p>Repeated enough, it stops feeling like something you do. It starts feeling like who you are. That is just my personality. I have always been this way.</p></div></div>
+      <div class="fstep"><div class="fs-num">6</div><div class="fs-body"><h4>Adult life repeats it</h4><p>New people, new situations, same script. The circumstances change. The operating system underneath stays the same.</p></div></div>
+    </div>
+  </div>
+
+  <!-- Three questions framework -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">Where It Comes From</div>
+    <h2 class="lm-h2">Three questions that <em>shaped everything.</em></h2>
+    <p class="lm-body">Most early patterns trace back to three questions every child is quietly trying to answer. They are not spoken questions. They are felt ones. How you learned to answer them became the foundation of how you relate.</p>
+    <div class="framework-grid">
+      <div class="framework-card"><div class="fc-icon teal">&#128101;</div><h3>Friends</h3><p>What did I have to be, do, or avoid to be liked, included, and kept in the group?</p></div>
+      <div class="framework-card"><div class="fc-icon amber">&#127968;</div><h3>Safety</h3><p>What did I have to do, or stop doing, to keep things calm and feel safe at home?</p></div>
+      <div class="framework-card"><div class="fc-icon sky">&#11088;</div><h3>Rewards</h3><p>What did I have to do to receive love, praise, or approval from the people who mattered?</p></div>
+    </div>
+    <div class="lm-deep" style="margin-top:32px"><p>Often a single behavior answered all three at once. Being the agreeable one might have kept your friends, reduced conflict at home, and earned praise. When a pattern gets reinforced from every direction, it stops feeling like a choice and starts feeling like just the way you are.</p></div>
+  </div>
+
+  <!-- Why it feels true -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">Why It Feels So True</div>
+    <h2 class="lm-h2">We collect <em>evidence</em> for what we already believe.</h2>
+    <p class="lm-body">One reason a pattern is hard to see is that we naturally notice what confirms it. If you believe you are not important, you notice every moment you feel overlooked. If you believe people leave, you notice every goodbye. The moments that would prove the belief wrong tend to slide right past.</p>
+    <p class="lm-body">Over time the belief looks more and more true, even when it no longer matches reality. The behavior you see in yourself today is usually not the problem. It is the solution a younger you built. The question is whether it still serves you now.</p>
+  </div>
+
+  <!-- Adult Life -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">From Then To Now</div>
+    <h2 class="lm-h2">What it looks like once you are <em>grown.</em></h2>
+    <p class="lm-body">The six parts of the questionnaire map to where childhood patterns tend to land. You may recognize yourself in more than one.</p>
+    <div class="adult-rows">
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">1</div><div class="ar-title">Friendships, then social patterns</div></div><p class="ar-sub">The role you played with peers becomes your default in every group. It feels like personality when it is really a learned strategy.</p><div class="tags"><span class="tag">People-pleasing</span><span class="tag">Hard to say no</span><span class="tag">Over-performing socially</span><span class="tag">Fear of conflict</span></div></div>
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">2</div><div class="ar-title">Safety, then emotional defaults</div></div><p class="ar-sub">What you had to suppress or manage at home still triggers the same response now, even when the room is safe.</p><div class="tags"><span class="tag amber">Hypervigilance</span><span class="tag amber">Trouble trusting</span><span class="tag amber">Shrinking in conflict</span><span class="tag amber">Shutting down</span></div></div>
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">3</div><div class="ar-title">Rewards, then how you earn belonging</div></div><p class="ar-sub">When love felt conditional, people keep earning connection without noticing. Receiving becomes harder than giving.</p><div class="tags"><span class="tag">Achieving for validation</span><span class="tag">Hard to receive</span><span class="tag">Fear of disappointing</span></div></div>
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">4</div><div class="ar-title">Attraction, then who you move toward</div></div><p class="ar-sub">What feels like chemistry is sometimes a pattern recognizing a pattern, especially around unavailability, intensity, and need.</p><div class="tags"><span class="tag sky">Drawn to unavailability</span><span class="tag sky">Intensity feels like connection</span><span class="tag sky">Chasing over receiving</span></div></div>
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">5</div><div class="ar-title">Pulling it together, then the throughline</div></div><p class="ar-sub">Most patterns serve the same core need. Seeing the thread that connects all of yours is where real understanding starts.</p><div class="tags"><span class="tag">Editing yourself in real time</span><span class="tag">Adapting to the room</span><span class="tag">Performing to be chosen</span></div></div>
+      <div class="adult-row"><div class="ar-header"><div class="ar-num">6</div><div class="ar-title">Now, then where it lives today</div></div><p class="ar-sub">The roles you played early on resurface later, with different people but a familiar script. Seeing it clearly is where choice begins.</p><div class="tags"><span class="tag amber">Giving more than receiving</span><span class="tag amber">Fear of being left</span><span class="tag amber">Avoiding conflict</span><span class="tag amber">Losing yourself in others</span></div></div>
+    </div>
+  </div>
+
+  <!-- Reframe -->
+  <div class="lm-section">
+    <div class="lm-eyebrow">The Reframe</div>
+    <div class="lm-reframe">
+      <h3>Your pattern is not a problem. It is a solution that <em>outlived its usefulness.</em></h3>
+      <p>Everything you are about to reflect on was once a smart, adaptive response. The child who learned to be agreeable was staying safe. The one who overachieved was earning love the only way they knew. The one who disappeared was protecting themselves from pain.</p>
+      <p>Come at the questions with curiosity, not criticism. This is not about blaming your parents, your friends, or your younger self. It is about awareness. Seeing the pattern clearly, where it came from and how it runs now, is what makes a real choice possible.</p>
+      <p class="closing-line">You cannot change what you cannot see. This is where the seeing begins.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="lm-cta">
+    <h2>Ready to see what has been running in the background?</h2>
+    <p>The questionnaire takes about ten to fifteen minutes. Answer as honestly as you can.</p>
+    <button class="btn-start" onclick="showPrivacy()">Start the Questionnaire</button>
+  </div>
+
+</div><!-- end #learningModule -->
+
+<!-- ===================== PRIVACY ===================== -->
+<div id="privacySection">
+  <div class="privacy-card">
+    <div class="lock-icon">&#128274;</div>
+    <h2>This questionnaire is completely confidential.</h2>
+    <p>Everything you share here stays private. Your answers are not viewed, shared, or stored by anyone, including me. No one else will ever see what you write or select.</p>
+    <div class="privacy-highlight">So you can take this freely and answer as honestly as you can.</div>
+    <p>At the end of your results I ask five short feedback questions, sent to me anonymously. They help me understand whether this work is actually doing what it is meant to do.</p>
+    <div class="privacy-btn-row">
+      <button class="btn-start" onclick="showQuestionnaire()">I understand, let's begin</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== QUESTIONNAIRE ===================== -->
+<div id="questionnaireSection">
+<div class="container">
+
+<!-- == PART 1: FRIENDSHIPS == -->
+<div class="section-card active" data-section="friendships" data-index="0">
+  <div class="section-header">
+    <div class="section-eyebrow">Part One</div>
+    <h2 class="section-title">Friendships</h2>
+    <p class="section-subline">The first place you learned who you had to be.</p>
+    <div class="section-context">Before you had words for it, you were already learning the rules of belonging. When you think of your friendships growing up, the ones that felt good and the ones that were hard, this is where those patterns started. Take your time. Some of this may surprise you.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">When you think of your friendships growing up, the ones that felt good and the ones that were hard, what is the first thing that comes to mind?</p>
+    <textarea data-key="friendships_reflection" placeholder="Take as much or as little space as you need here..."></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">When I felt most included or valued by friends, it was usually when I was:</p>
+    <p class="question-sub">Not who you wanted to be. Who actually got the warmest response.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who went along with things, even when I disagreed"> The one who went along with things, even when I disagreed</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who made people laugh and kept things light"> The one who made people laugh and kept things light</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who stayed quiet and did not cause friction"> The one who stayed quiet and did not cause friction</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who was useful, helpful, or easy to need"> The one who was useful, helpful, or easy to need</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who made others feel good about themselves"> The one who made others feel good about themselves</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who proved my worth through achievement or talent"> The one who proved my worth through achievement or talent</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who did not need much from anyone"> The one who did not need much from anyone</label>
+      <label class="option-label"><input type="checkbox" data-key="f1" value="The one who shifted to match whoever I was with"> The one who shifted to match whoever I was with</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="f1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">Underneath the surface of my friendships, the thing I quietly worried about was that I was:</p>
+    <p class="question-sub">The fear you did not say out loud, the one that shaped how you behaved.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Too much, too intense, too emotional, too needy"> Too much, too intense, too emotional, too needy</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Not enough, not interesting or cool enough to keep"> Not enough, not interesting or cool enough to keep</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Too sensitive, like my feelings were embarrassing"> Too sensitive, like my feelings were embarrassing</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Too different from everyone else to truly belong"> Too different from everyone else to truly belong</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Replaceable, like they could find someone better easily"> Replaceable, like they could find someone better easily</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="Annoying in ways I could not see or control"> Annoying in ways I could not see or control</label>
+      <label class="option-label"><input type="checkbox" data-key="f2" value="A burden, like my needs made me hard to be around"> A burden, like my needs made me hard to be around</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="f2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">To keep a friendship feeling stable and safe, I felt like I had to:</p>
+    <p class="question-sub">What you did to hold the connection together, even when it cost you.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Always be available, even when I had nothing left to give"> Always be available, even when I had nothing left to give</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Agree more than I actually did"> Agree more than I actually did</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Be fun or interesting enough to be worth keeping"> Be fun or interesting enough to be worth keeping</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Be useful or needed in some steady way"> Be useful or needed in some steady way</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Hide the parts of me that felt too big or too different"> Hide the parts of me that felt too big or too different</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Avoid bringing up what bothered me, to keep the peace"> Avoid bringing up what bothered me, to keep the peace</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Be the one who reached out first and kept things going"> Be the one who reached out first and kept things going</label>
+      <label class="option-label"><input type="checkbox" data-key="f3" value="Earn my place again and again rather than just having it"> Earn my place again and again rather than just having it</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="f3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When a friendship started to feel uncertain, like it might cool off or pull away, my usual response was to:</p>
+    <p class="question-sub">This can be hard to look at honestly. Go with what was actually true.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Try harder to hold it together and prove I was worth keeping"> Try harder to hold it together and prove I was worth keeping</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Pull away first, before they could"> Pull away first, before they could</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Convince myself I did not care as much as I did"> Convince myself I did not care as much as I did</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Blame myself and replay what I might have done wrong"> Blame myself and replay what I might have done wrong</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Feel quietly panicked but try not to show it"> Feel quietly panicked but try not to show it</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Go still and wait, unable to act"> Go still and wait, unable to act</label>
+      <label class="option-label"><input type="checkbox" data-key="f4" value="Accept it quietly, even when it hurt more than I let on"> Accept it quietly, even when it hurt more than I let on</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="f4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">The parts of myself I hid or changed to stay accepted in friendships:</p>
+    <p class="question-sub">What you learned could not come with you, the things you tucked away to make it work.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="f5" value="How much I actually cared about the friendship"> How much I actually cared about the friendship</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="My real opinions, especially when they differed"> My real opinions, especially when they differed</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="Parts of my home or family that felt like too much to explain"> Parts of my home or family that felt like too much to explain</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="Sides of me that felt too intense, weird, or different"> Sides of me that felt too intense, weird, or different</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="My insecurities, what I was most scared they would see"> My insecurities, what I was most scared they would see</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="How much something hurt me, I acted fine when I was not"> How much something hurt me, I acted fine when I was not</label>
+      <label class="option-label"><input type="checkbox" data-key="f5" value="The feeling that I did not fully belong, even when I was right there"> The feeling that I did not fully belong, even when I was right there</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="f5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When you think back, what did those friendships start to teach you about yourself? What did you begin to believe you had to be, or could not afford to be, to stay accepted?</p>
+    <p class="question-sub">Take your time with this one. It is often where the most important insight lives.</p>
+    <textarea data-key="f_belief" placeholder="What did those years teach you about who you needed to be?"></textarea>
+  </div>
+
+  <div class="pattern-bridge">
+    <div class="pattern-bridge-label">Pattern Bridge</div>
+    <p class="pattern-bridge-intro">Now bring it forward. These patterns did not stop when childhood did.</p>
+    <div class="bridge-question"><p>Where does this version of you still show up today, in your current friendships, your social life, or the way you move through a group?</p><textarea data-key="f_bridge1" placeholder="Be as specific as you can..."></textarea></div>
+    <div class="bridge-question"><p>When you react from this place now, does it fit what is actually happening, or does it feel bigger and older than the moment calls for?</p><textarea data-key="f_bridge2" placeholder="Think about a recent example if you can..."></textarea></div>
+  </div>
+
+  <div class="nav-row">
+    <span class="step-label">1 of 6</span>
+    <button class="btn btn-primary" onclick="nextSection()">Continue</button>
+  </div>
+</div>
+
+<!-- == PART 2: SAFETY == -->
+<div class="section-card" data-section="safety" data-index="1">
+  <div class="section-header">
+    <div class="section-eyebrow">Part Two</div>
+    <h2 class="section-title">Safety</h2>
+    <p class="section-subline">What home taught you about the world.</p>
+    <div class="section-context">Every child learns to read the emotional weather around them and adapt to it. You did not choose your responses. You discovered what worked, and your body remembered. This part is about those early strategies: what you did to feel safe, and what it cost you.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">When you think of the emotional weather in your home growing up, what did it actually feel like to be there day to day?</p>
+    <textarea data-key="safety_reflection" placeholder="Think about the atmosphere, not just specific events, but the overall feeling..."></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">The emotional environment I grew up in most often felt:</p>
+    <p class="question-sub">Not what it looked like from outside. What it felt like to live in it.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Unpredictable, I never quite knew what I was coming home to"> Unpredictable, I never quite knew what I was coming home to</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Calm on the surface, with something tense running underneath"> Calm on the surface, with something tense running underneath</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Warm and loving, but with conditions attached"> Warm and loving, but with conditions attached</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Cold or distant, not much warmth moving around"> Cold or distant, not much warmth moving around</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Loving but anxious, the love was real and so was the worry"> Loving but anxious, the love was real and so was the worry</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Chaotic, things shifted fast and I was always adjusting"> Chaotic, things shifted fast and I was always adjusting</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Performing happiness, the outside did not match the inside"> Performing happiness, the outside did not match the inside</label>
+      <label class="option-label"><input type="checkbox" data-key="s1" value="Safe and genuinely steady, I usually knew what to expect"> Safe and genuinely steady, I usually knew what to expect</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="s1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">To feel safe, or at least safer, at home, I learned to:</p>
+    <p class="question-sub">These were survival strategies. They made complete sense at the time.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Stay quiet and not make waves, even when something bothered me"> Stay quiet and not make waves, even when something bothered me</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Be helpful and useful, my presence needed a purpose"> Be helpful and useful, my presence needed a purpose</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Read the room carefully before speaking or asking for anything"> Read the room carefully before speaking or asking for anything</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Manage other people's emotions so things did not escalate"> Manage other people's emotions so things did not escalate</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Make myself invisible when things felt tense"> Make myself invisible when things felt tense</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Perform calm or happiness, even when I felt something else"> Perform calm or happiness, even when I felt something else</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Be as close to perfect as possible, so there was less to criticize"> Be as close to perfect as possible, so there was less to criticize</label>
+      <label class="option-label"><input type="checkbox" data-key="s2" value="Take up as little space as I could, emotionally or physically"> Take up as little space as I could, emotionally or physically</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="s2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When a parent or someone with authority over me was upset, stressed, or angry, I would typically:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Try to fix the problem or smooth things over"> Try to fix the problem or smooth things over</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Find a way to disappear"> Find a way to disappear</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Make myself as small and unnoticeable as possible"> Make myself as small and unnoticeable as possible</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Try to cheer them up or distract them"> Try to cheer them up or distract them</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Feel responsible for it, even when it had nothing to do with me"> Feel responsible for it, even when it had nothing to do with me</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Freeze and wait for it to pass"> Freeze and wait for it to pass</label>
+      <label class="option-label"><input type="checkbox" data-key="s3" value="Shut down emotionally, go flat or numb"> Shut down emotionally, go flat or numb</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="s3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">Love, affection, or approval in my home felt most connected to:</p>
+    <p class="question-sub">What seemed to make you more loveable, or less, in the eyes of the people who raised you.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Achieving things or performing well"> Achieving things or performing well</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Behaving the right way, being good or easy"> Behaving the right way, being good or easy</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Not causing problems, staying out of trouble"> Not causing problems, staying out of trouble</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Being easy to deal with, not adding to anyone's load"> Being easy to deal with, not adding to anyone's load</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Meeting expectations, whatever they happened to be"> Meeting expectations, whatever they happened to be</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Physical presence without much emotional connection"> Physical presence without much emotional connection</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Moments of warmth, but never something I could count on"> Moments of warmth, but never something I could count on</label>
+      <label class="option-label"><input type="checkbox" data-key="s4" value="Just being present, it truly felt unconditional"> Just being present, it truly felt unconditional</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="s4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">The message I absorbed about emotions growing up, not what anyone said out loud but what I learned was true, was:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="s5" value="They were not safe to express, better to keep them inside"> They were not safe to express, better to keep them inside</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="They could be used against me if I showed them at the wrong moment"> They could be used against me if I showed them at the wrong moment</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="Mine mattered less than everyone else's in the room"> Mine mattered less than everyone else's in the room</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="Expressing them made things harder, not better"> Expressing them made things harder, not better</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="They were weakness, something to get over rather than feel"> They were weakness, something to get over rather than feel</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="It was my job to manage everyone else's, not to have my own"> It was my job to manage everyone else's, not to have my own</label>
+      <label class="option-label"><input type="checkbox" data-key="s5" value="They were welcomed and taken seriously, I felt genuinely heard"> They were welcomed and taken seriously, I felt genuinely heard</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="s5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When you think of growing up in that environment, what did it start to teach you about yourself, about what was safe to feel, who you had to be, and what you had to hide to stay okay?</p>
+    <textarea data-key="s_belief" placeholder="What beliefs about yourself, love, or safety got built in those early years?"></textarea>
+  </div>
+
+  <div class="pattern-bridge">
+    <div class="pattern-bridge-label">Pattern Bridge</div>
+    <p class="pattern-bridge-intro">The strategies you used at home do not tend to stay there.</p>
+    <div class="bridge-question"><p>Where do you notice these same responses today, in relationships, at school or work, or any time you feel stress or uncertainty?</p><textarea data-key="s_bridge1" placeholder="Be as specific as you can..."></textarea></div>
+    <div class="bridge-question"><p>When this version of you shows up now, does the response fit what is happening, or does it feel older and more automatic than the situation calls for?</p><textarea data-key="s_bridge2" placeholder="Think about a recent example if you can..."></textarea></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="prevSection()">Back</button>
+    <span class="step-label">2 of 6</span>
+    <button class="btn btn-primary" onclick="nextSection()">Continue</button>
+  </div>
+</div>
+
+<!-- == PART 3: REWARDS == -->
+<div class="section-card" data-section="rewards" data-index="2">
+  <div class="section-header">
+    <div class="section-eyebrow">Part Three</div>
+    <h2 class="section-title">Rewards &amp; Value</h2>
+    <p class="section-subline">How you learned what made you worth keeping.</p>
+    <div class="section-context">Somewhere along the way you got a message about what made you valuable. Not in words, but in what got praised and what got ignored, in what drew people closer and what pushed them away. Those messages still shape how you see your own worth today.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">When you think of what you had to do, be, or accomplish to feel like you genuinely mattered to the people around you, what comes up?</p>
+    <textarea data-key="rewards_reflection" placeholder="Think about what earned warmth, attention, or approval when you were young..."></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">The things that seemed to earn me the most approval, attention, or warmth:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Achievement and performance, doing well made me more visible and valued"> Achievement and performance, doing well made me more visible and valued</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Being agreeable and easy, not causing problems made things smoother"> Being agreeable and easy, not causing problems made things smoother</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Being helpful and selfless, giving made me feel necessary"> Being helpful and selfless, giving made me feel necessary</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Being smart or capable, competence was what got noticed"> Being smart or capable, competence was what got noticed</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Being likeable, charming, or attractive, how I was seen mattered"> Being likeable, charming, or attractive, how I was seen mattered</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Not needing much, being low-maintenance kept people close"> Not needing much, being low-maintenance kept people close</label>
+      <label class="option-label"><input type="checkbox" data-key="r1" value="Keeping the peace, staying calm and steady in hard moments"> Keeping the peace, staying calm and steady in hard moments</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="r1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When I did something well or tried hard, the response I most often received was:</p>
+    <p class="question-sub">Not the response you hoped for. What you actually got, most of the time.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Genuine warmth and celebration, they were really happy for me"> Genuine warmth and celebration, they were really happy for me</label>
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Acknowledgment, but with a condition or caveat attached"> Acknowledgment, but with a condition or caveat attached</label>
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Barely noticed, it passed quickly without much recognition"> Barely noticed, it passed quickly without much recognition</label>
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Compared to someone else, measured against another standard"> Compared to someone else, measured against another standard</label>
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Praised, but the bar immediately moved higher"> Praised, but the bar immediately moved higher</label>
+      <label class="option-label"><input type="checkbox" data-key="r2" value="Acknowledged around others, but not in private moments"> Acknowledged around others, but not in private moments</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="r2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">The thing I learned my worth was most connected to:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="r3" value="What I produced, accomplished, or delivered"> What I produced, accomplished, or delivered</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="How comfortable and easy I made others feel"> How comfortable and easy I made others feel</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="How little I asked for or needed"> How little I asked for or needed</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="How well I performed when it really mattered"> How well I performed when it really mattered</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="Whether I was needed by someone else"> Whether I was needed by someone else</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="How I appeared to others, how I was perceived"> How I appeared to others, how I was perceived</label>
+      <label class="option-label"><input type="checkbox" data-key="r3" value="Whether I caused problems or stayed under the radar"> Whether I caused problems or stayed under the radar</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="r3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When I made a mistake or fell short, what I felt most was:</p>
+    <p class="question-sub">The emotion that hit first, not the thought, the feeling.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="r4" value="Shame, like the mistake said something true about who I was"> Shame, like the mistake said something true about who I was</label>
+      <label class="option-label"><input type="checkbox" data-key="r4" value="Fear of losing someone's approval or love because of it"> Fear of losing someone's approval or love because of it</label>
+      <label class="option-label"><input type="checkbox" data-key="r4" value="Like I had just proven a bad belief about myself right"> Like I had just proven a bad belief about myself right</label>
+      <label class="option-label"><input type="checkbox" data-key="r4" value="An urgent need to fix it or hide it before anyone saw"> An urgent need to fix it or hide it before anyone saw</label>
+      <label class="option-label"><input type="checkbox" data-key="r4" value="Like I had let someone important down and had to make it right"> Like I had let someone important down and had to make it right</label>
+      <label class="option-label"><input type="checkbox" data-key="r4" value="An instinct to blame something else before looking at my part"> An instinct to blame something else before looking at my part</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="r4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">What those early lessons about worth and value left me carrying today:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Perfectionism, the bar never feels quite met"> Perfectionism, the bar never feels quite met</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Trouble receiving without feeling I have to earn it first"> Trouble receiving without feeling I have to earn it first</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Tying my worth to output, productivity, or results"> Tying my worth to output, productivity, or results</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Needing outside validation to feel genuinely okay"> Needing outside validation to feel genuinely okay</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="The quiet fear of being too much and not enough at once"> The quiet fear of being too much and not enough at once</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Overgiving to stay valuable and keep people close"> Overgiving to stay valuable and keep people close</label>
+      <label class="option-label"><input type="checkbox" data-key="r5" value="Trouble resting without feeling guilty about it"> Trouble resting without feeling guilty about it</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="r5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">Looking back, what did those years teach you to believe about what you are worth, and what you have to do to deserve good things?</p>
+    <textarea data-key="r_belief" placeholder="What did you conclude about your value, and what it takes to earn it?"></textarea>
+  </div>
+
+  <div class="pattern-bridge">
+    <div class="pattern-bridge-label">Pattern Bridge</div>
+    <p class="pattern-bridge-intro">The way you learned to earn your worth does not disappear when you grow up.</p>
+    <div class="bridge-question"><p>Where do you still find yourself earning rather than just being? In what relationships or settings does it show up most?</p><textarea data-key="r_bridge1" placeholder="Be as specific as you can..."></textarea></div>
+    <div class="bridge-question"><p>When you are in that mode now, performing or overgiving, does it feel like a choice or does it happen automatically before you notice?</p><textarea data-key="r_bridge2" placeholder="Think about a recent example if you can..."></textarea></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="prevSection()">Back</button>
+    <span class="step-label">3 of 6</span>
+    <button class="btn btn-primary" onclick="nextSection()">Continue</button>
+  </div>
+</div>
+
+<!-- == PART 4: CONNECTION == -->
+<div class="section-card" data-section="connection" data-index="3">
+  <div class="section-header">
+    <div class="section-eyebrow">Part Four</div>
+    <h2 class="section-title">Attraction &amp; Connection</h2>
+    <p class="section-subline">The people you moved toward, and what that reveals.</p>
+    <div class="section-context">Think of the people who felt magnetic to you, the ones who seemed important, hard to stop thinking about, or whose attention felt significant. Close friends, mentors, people you admired, anyone who held a pull. Romantic experience is not assumed here. This is about connection in any form.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">When you think of the people you were most drawn to, who felt significant in some way, what was it about them that held that pull?</p>
+    <textarea data-key="connection_reflection" placeholder="Think about what made certain people feel magnetic or important to you..."></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">The people I was most consistently drawn to tended to be:</p>
+    <p class="question-sub">Not who you thought you should like. Who actually held a pull for you.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Hard to read or unpredictable, I was always trying to figure them out"> Hard to read or unpredictable, I was always trying to figure them out</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Confident and sure of themselves in a way that felt magnetic"> Confident and sure of themselves in a way that felt magnetic</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Emotionally unavailable in some way, I had to work for their attention"> Emotionally unavailable in some way, I had to work for their attention</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Warm and accepting, they made me feel genuinely okay"> Warm and accepting, they made me feel genuinely okay</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Exciting but unpredictable, the highs were high and so were the lows"> Exciting but unpredictable, the highs were high and so were the lows</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Intense, the connection felt significant and moved fast"> Intense, the connection felt significant and moved fast</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="People who needed me, I was useful or important to them"> People who needed me, I was useful or important to them</label>
+      <label class="option-label"><input type="checkbox" data-key="c1" value="Easy to feel safe with, I could just be myself"> Easy to feel safe with, I could just be myself</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="c1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">In connections that felt important to me, I tended to:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Work harder at the connection than the other person seemed to"> Work harder at the connection than the other person seemed to</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Be the one who cared more, or at least it felt that way"> Be the one who cared more, or at least it felt that way</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Pull back when things got too close or too real"> Pull back when things got too close or too real</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Lose track of myself in who they needed me to be"> Lose track of myself in who they needed me to be</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Give more than I received, often for a long time before noticing"> Give more than I received, often for a long time before noticing</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Wait to be chosen rather than choosing, hold back and see"> Wait to be chosen rather than choosing, hold back and see</label>
+      <label class="option-label"><input type="checkbox" data-key="c2" value="Make myself indispensable so they had a reason to stay"> Make myself indispensable so they had a reason to stay</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="c2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When someone I cared about pulled away or felt less available, I usually:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Blamed myself first, went through what I might have done wrong"> Blamed myself first, went through what I might have done wrong</label>
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Tried harder to reconnect and close the gap"> Tried harder to reconnect and close the gap</label>
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Pretended I did not care as much as I did"> Pretended I did not care as much as I did</label>
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Felt like proof something was fundamentally wrong with me"> Felt like proof something was fundamentally wrong with me</label>
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Disappeared before they could fully pull away, beat them to it"> Disappeared before they could fully pull away, beat them to it</label>
+      <label class="option-label"><input type="checkbox" data-key="c3" value="Analyzed every recent interaction trying to find where it shifted"> Analyzed every recent interaction trying to find where it shifted</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="c3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When a connection started to feel really close, really safe, or really good, some part of me:</p>
+    <p class="question-sub">What happened on the inside when something actually went well.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Braced for it to go wrong, waiting for the catch"> Braced for it to go wrong, waiting for the catch</label>
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Pulled back or created distance without fully meaning to"> Pulled back or created distance without fully meaning to</label>
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Felt I had to keep earning it or it would disappear"> Felt I had to keep earning it or it would disappear</label>
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Found a reason to doubt it or pick it apart"> Found a reason to doubt it or pick it apart</label>
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Got scared of how much it would hurt to lose"> Got scared of how much it would hurt to lose</label>
+      <label class="option-label"><input type="checkbox" data-key="c4" value="Let it in and trusted it, it did not scare me"> Let it in and trusted it, it did not scare me</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="c4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">Being truly seen and known by someone, not performing, just being, feels:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Terrifying, too much exposure, too much risk"> Terrifying, too much exposure, too much risk</label>
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Like something I want deeply but do not quite believe is available to me"> Like something I want deeply but do not quite believe is available to me</label>
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Like something I have to earn first before I deserve it"> Like something I have to earn first before I deserve it</label>
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Wonderful when it happens, but hard to trust it will last"> Wonderful when it happens, but hard to trust it will last</label>
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Only possible with a very small number of people"> Only possible with a very small number of people</label>
+      <label class="option-label"><input type="checkbox" data-key="c5" value="Natural and real, I have had it and it does not scare me"> Natural and real, I have had it and it does not scare me</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="c5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="pattern-bridge">
+    <div class="pattern-bridge-label">Pattern Bridge</div>
+    <p class="pattern-bridge-intro">The patterns in who we are drawn to, and how we behave when we are, tend to be some of the most persistent we carry.</p>
+    <div class="bridge-question"><p>Looking at your connections now, do you see any of these same patterns still running? Who are you drawn to, and how do you tend to show up?</p><textarea data-key="c_bridge1" placeholder="Be as honest as you can here..."></textarea></div>
+    <div class="bridge-question"><p>Is there a kind of connection you find yourself recreating, even when part of you knows it costs you something?</p><textarea data-key="c_bridge2" placeholder="Think about what keeps feeling familiar..."></textarea></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="prevSection()">Back</button>
+    <span class="step-label">4 of 6</span>
+    <button class="btn btn-primary" onclick="nextSection()">Continue</button>
+  </div>
+</div>
+
+<!-- == PART 5: PULLING IT TOGETHER == -->
+<div class="section-card" data-section="synthesis" data-index="4">
+  <div class="section-header">
+    <div class="section-eyebrow">Part Five</div>
+    <h2 class="section-title">Pulling It Together</h2>
+    <p class="section-subline">Connecting what you have just seen.</p>
+    <div class="section-context">You have moved through four territories: friendships, home, worth, and connection. This is where the fragments become a picture. Stay in it. The most useful insight here is often the one that surprises you.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">Looking across everything you have just answered, what is the first thing you notice? What thread keeps showing up?</p>
+    <textarea data-key="synthesis_reflection" placeholder="Do not overthink this. What is the first thing that strikes you?"></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">The pattern that shows up most consistently across the different areas of my life is:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I give more than I receive, and I have for a long time"> I give more than I receive, and I have for a long time</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I shrink or shape myself to fit what others need from me"> I shrink or shape myself to fit what others need from me</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I earn love and approval rather than simply receiving it"> I earn love and approval rather than simply receiving it</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I pull away when things get too real, too close, or too good"> I pull away when things get too real, too close, or too good</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I manage other people's emotions at the cost of my own"> I manage other people's emotions at the cost of my own</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I stay in situations longer than I want to, because leaving feels dangerous"> I stay in situations longer than I want to, because leaving feels dangerous</label>
+      <label class="option-label"><input type="checkbox" data-key="sy1" value="I leave before I can be left, I get out first"> I leave before I can be left, I get out first</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="sy1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">The emotion that tends to run underneath most of these patterns, the one really driving the behavior:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of not being enough, that on some level I fall short"> Fear of not being enough, that on some level I fall short</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of being too much, that my full self is more than people can handle"> Fear of being too much, that my full self is more than people can handle</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of being left, that if I stop performing people will go"> Fear of being left, that if I stop performing people will go</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of being truly seen, because what they find might not be loveable"> Fear of being truly seen, because what they find might not be loveable</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of losing myself, of disappearing into what others need"> Fear of losing myself, of disappearing into what others need</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of rejection, the sting of it feels too personal"> Fear of rejection, the sting of it feels too personal</label>
+      <label class="option-label"><input type="checkbox" data-key="sy2" value="Fear of being a burden, that my needs are an imposition"> Fear of being a burden, that my needs are an imposition</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="sy2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">If I trace it all the way down, the belief about myself that seems to sit at the root is:</p>
+    <p class="question-sub">The quiet conclusion underneath the behavior. Pick the one that lands, even if part of you knows it is not true.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="I have to earn love, it does not just come to me"> I have to earn love, it does not just come to me</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="My needs are too much, or do not really matter"> My needs are too much, or do not really matter</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="If people really knew me, they would pull away"> If people really knew me, they would pull away</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="I am safer handling things on my own"> I am safer handling things on my own</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="I am responsible for how everyone around me feels"> I am responsible for how everyone around me feels</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="I am only valuable when I am useful or achieving"> I am only valuable when I am useful or achieving</label>
+      <label class="option-label"><input type="checkbox" data-key="sy3" value="I cannot fully trust that good things will stay"> I cannot fully trust that good things will stay</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="sy3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">What I needed most when I was younger, and rarely got enough of, was:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To be seen without having to perform, just as I was"> To be seen without having to perform, just as I was</label>
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To be loved without conditions attached"> To be loved without conditions attached</label>
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To feel emotionally safe, to not always be braced for something"> To feel emotionally safe, to not always be braced for something</label>
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To be allowed to struggle, fail, or be difficult sometimes"> To be allowed to struggle, fail, or be difficult sometimes</label>
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To have someone hold space for me, instead of the other way around"> To have someone hold space for me, instead of the other way around</label>
+      <label class="option-label"><input type="checkbox" data-key="sy4" value="To not be responsible for how the people around me were feeling"> To not be responsible for how the people around me were feeling</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="sy4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">Where this pattern has cost me the most is:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In my friendships, the connection never quite goes deep enough"> In my friendships, the connection never quite goes deep enough</label>
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In my family, the same old role still pulls me back in"> In my family, the same old role still pulls me back in</label>
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In romantic or close connections, I keep recreating the same dynamic"> In romantic or close connections, I keep recreating the same dynamic</label>
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In how I treat myself, I am harder on me than on anyone else"> In how I treat myself, I am harder on me than on anyone else</label>
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In chances I did not take because they felt too risky"> In chances I did not take because they felt too risky</label>
+      <label class="option-label"><input type="checkbox" data-key="sy5" value="In rarely feeling fully known, even by people close to me"> In rarely feeling fully known, even by people close to me</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="sy5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">If you had to put your pattern into one sentence, the core thing you do to stay connected, accepted, or safe, what would it be?</p>
+    <p class="question-sub">Do not edit this too much. The first version is often the most honest.</p>
+    <textarea data-key="sy_pattern_sentence" placeholder="I tend to... / My pattern is... / What I do is..."></textarea>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="prevSection()">Back</button>
+    <span class="step-label">5 of 6</span>
+    <button class="btn btn-primary" onclick="nextSection()">Continue</button>
+  </div>
+</div>
+
+<!-- == PART 6: NOW == -->
+<div class="section-card" data-section="now" data-index="5">
+  <div class="section-header">
+    <div class="section-eyebrow">Part Six</div>
+    <h2 class="section-title">Now</h2>
+    <p class="section-subline">Where these patterns live in your life today.</p>
+    <div class="section-context">This is not about what you did wrong or what happened to you. It is about understanding what you learned, and recognizing that what you learned, you can also see clearly. Seeing it clearly is where things start to shift.</div>
+  </div>
+  <div class="reflection-block">
+    <p class="reflection-label">Where do you feel these patterns most clearly in your life right now, in which relationships, situations, or parts of yourself?</p>
+    <textarea data-key="now_reflection" placeholder="Try to be specific, a relationship, a behavior, a reaction that keeps happening..."></textarea>
+  </div>
+  <hr class="divider">
+
+  <div class="question-block">
+    <p class="question-label">The patterns I can most clearly still see in myself today are:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Trying to earn approval or love in my close relationships"> Trying to earn approval or love in my close relationships</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Shrinking to fit what someone else needs or expects"> Shrinking to fit what someone else needs or expects</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Giving more than I receive and feeling the imbalance but not naming it"> Giving more than I receive and feeling the imbalance but not naming it</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Avoiding conflict to keep the connection, even when something matters"> Avoiding conflict to keep the connection, even when something matters</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Pulling away emotionally when someone gets too close"> Pulling away emotionally when someone gets too close</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Staying in situations I have outgrown because leaving feels too risky"> Staying in situations I have outgrown because leaving feels too risky</label>
+      <label class="option-label"><input type="checkbox" data-key="n1" value="Needing to be needed, feeling most secure when I am useful"> Needing to be needed, feeling most secure when I am useful</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="n1_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When this pattern shows up now, how quickly do I notice it, and what do I usually do with that awareness?</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="n2" value="I often do not notice until well after it has run its course"> I often do not notice until well after it has run its course</label>
+      <label class="option-label"><input type="checkbox" data-key="n2" value="I am starting to catch it as it happens, even if I cannot stop it yet"> I am starting to catch it as it happens, even if I cannot stop it yet</label>
+      <label class="option-label"><input type="checkbox" data-key="n2" value="I notice it but do it anyway, the pull is stronger than the awareness"> I notice it but do it anyway, the pull is stronger than the awareness</label>
+      <label class="option-label"><input type="checkbox" data-key="n2" value="I sometimes catch it early enough to choose a different response"> I sometimes catch it early enough to choose a different response</label>
+      <label class="option-label"><input type="checkbox" data-key="n2" value="I mostly see it in hindsight, after the fact"> I mostly see it in hindsight, after the fact</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="n2_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">My relationship with my own needs right now, how well I know them and how much I honor them, looks most like:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="n3" value="I am getting better at knowing what I actually need, it is clearer now"> I am getting better at knowing what I actually need, it is clearer now</label>
+      <label class="option-label"><input type="checkbox" data-key="n3" value="I often put other people's needs ahead of my own without thinking"> I often put other people's needs ahead of my own without thinking</label>
+      <label class="option-label"><input type="checkbox" data-key="n3" value="I do not always know what I need, I have spent a long time not asking"> I do not always know what I need, I have spent a long time not asking</label>
+      <label class="option-label"><input type="checkbox" data-key="n3" value="I feel guilt when I prioritize myself, like I am taking from others"> I feel guilt when I prioritize myself, like I am taking from others</label>
+      <label class="option-label"><input type="checkbox" data-key="n3" value="I know what I need but struggle to actually act on it"> I know what I need but struggle to actually act on it</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="n3_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">When I picture choosing a different response next time, what gets in the way most is:</p>
+    <p class="question-sub">Naming the obstacle is part of loosening its grip.</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="n4" value="I will not notice in time, it happens too fast"> I will not notice in time, it happens too fast</label>
+      <label class="option-label"><input type="checkbox" data-key="n4" value="The old way feels safer, even when I know it costs me"> The old way feels safer, even when I know it costs me</label>
+      <label class="option-label"><input type="checkbox" data-key="n4" value="I do not actually know what a different response would look like"> I do not actually know what a different response would look like</label>
+      <label class="option-label"><input type="checkbox" data-key="n4" value="Fear of how the other person would react"> Fear of how the other person would react</label>
+      <label class="option-label"><input type="checkbox" data-key="n4" value="Guilt, like choosing for myself is selfish"> Guilt, like choosing for myself is selfish</label>
+      <label class="option-label"><input type="checkbox" data-key="n4" value="I do not fully believe I am allowed to"> I do not fully believe I am allowed to</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="n4_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div class="question-block">
+    <p class="question-label">What I most want from understanding my patterns, the real reason I am here:</p>
+    <span class="question-hint">Select all that apply</span>
+    <div class="options-grid">
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To stop repeating the same dynamics and finally have something different"> To stop repeating the same dynamics and finally have something different</label>
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To have relationships that feel more honest, balanced, and real"> To have relationships that feel more honest, balanced, and real</label>
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To feel more like myself, the version that does not have to perform"> To feel more like myself, the version that does not have to perform</label>
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To understand why I do what I do, even when I know better"> To understand why I do what I do, even when I know better</label>
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To give myself compassion for how I survived and what it cost"> To give myself compassion for how I survived and what it cost</label>
+      <label class="option-label"><input type="checkbox" data-key="n5" value="To finally feel like I am enough, without having to prove it"> To finally feel like I am enough, without having to prove it</label>
+      <div class="other-wrap"><input type="text" class="other-input" data-key="n5_other" placeholder="Something else, in your own words"></div>
+    </div>
+  </div>
+
+  <div id="submitError" class="error-box"></div>
+
+  <div class="nav-row">
+    <button class="btn btn-back" onclick="prevSection()">Back</button>
+    <span class="step-label">6 of 6</span>
+    <button class="btn btn-submit" id="submitBtn" onclick="submitQuestionnaire()">See My Patterns</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loadingState">
+  <div class="spinner"></div>
+  <p class="loading-h">Reading your patterns...</p>
+  <p class="loading-p">This usually takes about twenty to thirty seconds.</p>
+</div>
+
+<!-- RESULTS -->
+<div id="resultsState">
+  <div class="results-header">
+    <div class="eyebrow">Your Pattern Map</div>
+    <h2>Here is what your answers reveal.</h2>
+    <p>Each part reflects the pattern that formed in that area of your life, and how it may still be showing up today.</p>
+  </div>
+  <div id="sectionResults"></div>
+  <div id="synthesisResult"></div>
+
+  <div class="save-notice">
+    <strong>Want to keep this?</strong> Use your browser's print function (Ctrl+P or Cmd+P) and choose "Save as PDF" to save a copy of your results.
+  </div>
+
+  <!-- FEEDBACK FORM -->
+  <div class="feedback-card" id="feedbackCard">
+    <div class="eyebrow">Five Quick Questions</div>
+    <h3>Did this land?</h3>
+    <p class="fb-intro">These go to me anonymously. They are how I learn whether this is actually helpful. It takes about a minute.</p>
+
+    <div class="fb-q" data-fbkey="fb_accuracy">
+      <label>How accurate did your results feel?</label>
+      <div class="fb-scale">
+        <div class="fb-opt" data-val="1">Not at all</div>
+        <div class="fb-opt" data-val="2">A little</div>
+        <div class="fb-opt" data-val="3">Somewhat</div>
+        <div class="fb-opt" data-val="4">Mostly</div>
+        <div class="fb-opt" data-val="5">Very</div>
+      </div>
+    </div>
+
+    <div class="fb-q" data-fbkey="fb_insight">
+      <label>Did you learn something about yourself you had not put into words before?</label>
+      <div class="fb-scale">
+        <div class="fb-opt" data-val="1">Not really</div>
+        <div class="fb-opt" data-val="3">A little</div>
+        <div class="fb-opt" data-val="5">Yes, a lot</div>
+      </div>
+    </div>
+
+    <div class="fb-q" data-fbkey="fb_clarity">
+      <label>How clear and easy was the questionnaire to move through?</label>
+      <div class="fb-scale">
+        <div class="fb-opt" data-val="1">Confusing</div>
+        <div class="fb-opt" data-val="3">Okay</div>
+        <div class="fb-opt" data-val="5">Very clear</div>
+      </div>
+    </div>
+
+    <div class="fb-q" data-fbkey="fb_value">
+      <label>What was the most valuable part for you?</label>
+      <textarea placeholder="The thing that stayed with you, in your own words..."></textarea>
+    </div>
+
+    <div class="fb-q" data-fbkey="fb_improve">
+      <label>What would make this better, or what felt off?</label>
+      <textarea placeholder="Be honest. This is the part that helps me most..."></textarea>
+    </div>
+
+    <button class="fb-submit" id="fbSubmit" onclick="submitFeedback()">Send feedback</button>
+    <div class="fb-thanks" id="fbThanks"><p>Thank you. That genuinely helps.</p></div>
+  </div>
+
+</div>
+
+</div><!-- end .container -->
+</div><!-- end #questionnaireSection -->
+
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+// Your Netlify function that proxies the Anthropic API.
+const GENERATE_ENDPOINT = '/.netlify/functions/generate-pattern';
+// Your Formspree form ID for the anonymous feedback (replace YOUR_FORM_ID).
+const FEEDBACK_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+// Labels for the four "territory" pattern cards in the results.
+const SECTION_LABELS = {
+  friendships: 'Friendships',
+  safety: 'Safety',
+  rewards: 'Rewards & Value',
+  connection: 'Attraction & Connection'
+};
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+let currentIndex = 0;
+const getCards = () => document.querySelectorAll('#questionnaireSection .section-card');
+
+function updateProgress(){
+  const total = getCards().length;
+  const visible = document.getElementById('questionnaireSection').style.display !== 'none';
+  const pct = visible ? (currentIndex / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+function showPrivacy(){
+  document.getElementById('learningModule').style.display = 'none';
+  document.getElementById('privacySection').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showQuestionnaire(){
+  document.getElementById('privacySection').style.display = 'none';
+  document.getElementById('questionnaireSection').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateProgress();
+}
+function showSection(i){
+  const cards = getCards();
+  cards.forEach(c => c.classList.remove('active'));
+  if(cards[i]){ cards[i].classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  currentIndex = i;
+  updateProgress();
+}
+function nextSection(){ const cards = getCards(); if(currentIndex < cards.length - 1) showSection(currentIndex + 1); }
+function prevSection(){ if(currentIndex > 0) showSection(currentIndex - 1); }
+
+document.addEventListener('change', function(e){
+  if(e.target.type === 'checkbox'){
+    const label = e.target.closest('.option-label');
+    if(label) label.classList.toggle('checked', e.target.checked);
+  }
+});
+
+/* ============================================================
+   COLLECT ANSWERS
+   ============================================================ */
+function collectAnswers(){
+  const a = {};
+  document.querySelectorAll('#questionnaireSection textarea').forEach(el => {
+    if(el.dataset.key && el.value.trim()) a[el.dataset.key] = el.value.trim();
+  });
+  const groups = {};
+  document.querySelectorAll('#questionnaireSection input[type="checkbox"]').forEach(cb => {
+    const k = cb.dataset.key;
+    if(!groups[k]) groups[k] = [];
+    if(cb.checked) groups[k].push(cb.value);
+  });
+  Object.keys(groups).forEach(k => { if(groups[k].length) a[k] = groups[k]; });
+  document.querySelectorAll('#questionnaireSection .other-input').forEach(el => {
+    if(el.dataset.key && el.value.trim()) a[el.dataset.key] = el.value.trim();
+  });
+  return a;
+}
+
+/* ============================================================
+   SUBMIT
+   ============================================================ */
+async function submitQuestionnaire(){
+  const btn = document.getElementById('submitBtn');
+  const err = document.getElementById('submitError');
+  err.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Analyzing...';
+
+  const cards = getCards();
+  cards.forEach(c => c.classList.remove('active'));
+  document.getElementById('loadingState').classList.add('active');
+  document.getElementById('progressFill').style.width = '90%';
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  try{
+    const res = await fetch(GENERATE_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(collectAnswers())
+    });
+
+    const raw = await res.text();
+    if(!res.ok){
+      let msg = 'Something went wrong reading your patterns. Please try again.';
+      try{ const j = JSON.parse(raw); if(j && j.error) msg = j.error; }catch(_){}
+      throw new Error(msg);
+    }
+
+    let data;
+    try{ data = JSON.parse(raw); }
+    catch(parseErr){
+      console.error('Could not parse results JSON. Raw response:', raw);
+      throw new Error('The results came back in an unexpected format. Please try again.');
+    }
+
+    if(!data || (!Array.isArray(data.sections) && !data.synthesis)){
+      console.error('Results JSON missing expected fields:', data);
+      throw new Error('The results came back incomplete. Please try again.');
+    }
+
+    renderResults(data);
+  }catch(e){
+    console.error('Submit error:', e);
+    document.getElementById('loadingState').classList.remove('active');
+    if(cards[currentIndex]) cards[currentIndex].classList.add('active');
+    err.innerHTML = (e.message || 'Something went wrong. Please try again.') +
+      '<div class="retry-row"><button class="btn-retry" onclick="submitQuestionnaire()">Try again</button></div>';
+    err.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'See My Patterns';
+    updateProgress();
+  }
+}
+
+/* ============================================================
+   RENDER RESULTS (defensive)
+   ============================================================ */
+function esc(s){
+  if(s === undefined || s === null) return '';
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>');
+}
+function field(label, value){
+  if(!value) return '';
+  return '<div class="result-field"><div class="result-field-label">'+esc(label)+
+         '</div><div class="result-field-text">'+esc(value)+'</div></div>';
+}
+
+function renderResults(data){
+  document.getElementById('loadingState').classList.remove('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('resultsState').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  // Pattern cards
+  const sc = document.getElementById('sectionResults');
+  sc.innerHTML = '';
+  if(Array.isArray(data.sections) && data.sections.length){
+    data.sections.forEach(s => {
+      if(!s) return;
+      const label = SECTION_LABELS[s.key] || s.key || 'Pattern';
+      let html = '<div class="card-section-label">'+esc(label)+'</div>';
+      if(s.patternName) html += '<div class="pattern-name">'+esc(s.patternName)+'</div>';
+      if(s.patternTagline) html += '<div class="pattern-tagline">'+esc(s.patternTagline)+'</div>';
+      html += field('Where it came from', s.origin);
+      html += field('How it shows up now', s.presentDay);
+      html += field('What it costs you', s.cost);
+      html += field('The reframe', s.reframe);
+      if(s.invitation){
+        html += '<div class="result-field"><div class="result-field-label">One thing to sit with</div>'+
+                '<div class="invitation-box"><p>'+esc(s.invitation)+'</p></div></div>';
+      }
+      const card = document.createElement('div');
+      card.className = 'pattern-card';
+      card.innerHTML = html;
+      sc.appendChild(card);
+    });
+  }
+
+  // Synthesis
+  const synEl = document.getElementById('synthesisResult');
+  synEl.innerHTML = '';
+  if(data.synthesis){
+    const syn = data.synthesis;
+    let html = '<div class="synthesis-card"><div class="eyebrow">The Full Picture</div>'+
+               '<h3>'+esc(syn.heading || 'The thread running through all of it.')+'</h3>';
+    const sf = (label, val, cls) => val ?
+      '<div class="syn-field"><div class="syn-field-label">'+esc(label)+'</div>'+
+      '<div class="syn-field-text'+(cls?' '+cls:'')+'">'+esc(val)+'</div></div>' : '';
+    html += sf('Core pattern', syn.corePattern);
+    html += sf('The belief underneath it', syn.coreBelief || syn.coreWound);
+    html += sf('What you were actually looking for', syn.coreNeed);
+    html += sf('How it all connects', syn.throughline);
+    html += sf('What to carry forward', syn.closingTruth, 'closing-truth');
+    html += '</div>';
+    synEl.innerHTML = html;
+  }
+}
+
+/* ============================================================
+   FEEDBACK
+   ============================================================ */
+document.querySelectorAll('.fb-scale').forEach(scale => {
+  scale.addEventListener('click', e => {
+    const opt = e.target.closest('.fb-opt');
+    if(!opt) return;
+    scale.querySelectorAll('.fb-opt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  });
+});
+
+async function submitFeedback(){
+  const btn = document.getElementById('fbSubmit');
+  const payload = {};
+  document.querySelectorAll('#feedbackCard .fb-q').forEach(q => {
+    const key = q.dataset.fbkey;
+    const sel = q.querySelector('.fb-opt.selected');
+    const ta = q.querySelector('textarea');
+    if(sel) payload[key] = sel.dataset.val;
+    else if(ta && ta.value.trim()) payload[key] = ta.value.trim();
+  });
+
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try{
+    if(FEEDBACK_ENDPOINT.indexOf('YOUR_FORM_ID') === -1){
+      await fetch(FEEDBACK_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify(payload)
+      });
+    } else {
+      console.warn('Feedback endpoint not configured. Payload:', payload);
+    }
+  }catch(e){
+    console.error('Feedback send failed:', e);
+  }
+  btn.style.display = 'none';
+  document.getElementById('fbThanks').classList.add('show');
+}
+
+/* ============================================================
+   DEMO MODE  (add ?demo=1 to the URL to preview the results
+   layout without the backend; remove before sharing live)
+   ============================================================ */
+function loadDemo(){
+  document.getElementById('learningModule').style.display = 'none';
+  document.getElementById('privacySection').style.display = 'none';
+  document.getElementById('questionnaireSection').style.display = 'block';
+  getCards().forEach(c => c.classList.remove('active'));
+  renderResults({
+    sections: [
+      {key:'friendships',patternName:'The Adapter',patternTagline:'You learned to belong by becoming whatever the room needed.',
+       origin:'Early on, fitting in felt safest when you matched the people around you. Going along kept the peace and kept you close.',
+       presentDay:'You still read a group fast and shape yourself to it, often before you notice you are doing it.',
+       cost:'People know the version of you that fits. Fewer know the one underneath.',
+       reframe:'Adapting was a real skill. It kept you connected. The work now is letting people meet the unedited you.',
+       invitation:'Where this week could you say the slightly less convenient, more honest thing?'},
+      {key:'safety',patternName:'The Watcher',patternTagline:'You stayed safe by reading the weather before anyone spoke.',
+       origin:'Home rewarded noticing tension early, so you learned to scan and adjust.',
+       presentDay:'You sense a shift in mood before others and quietly brace for it.',
+       cost:'A lot of energy goes to managing what has not happened yet.',
+       reframe:'Your sensitivity is not a flaw. It is awareness that once protected you.',
+       invitation:'Notice one moment you brace, and check whether the room actually asked you to.'}
+    ],
+    synthesis:{heading:'The thread running through all of it.',
+      corePattern:'Across every area, you keep yourself safe by managing how others feel and shrinking what you need.',
+      coreBelief:'Underneath it sits a quiet belief that you have to earn your place rather than simply have it.',
+      coreNeed:'What you were really after was to be wanted as you are, without the performance.',
+      throughline:'Friendships, home, worth, connection. Same move, different rooms.',
+      closingTruth:'You built this to survive. You get to decide, now, whether you still need it.'}
+  });
+}
+
+if(new URLSearchParams(window.location.search).get('demo') === '1'){
+  loadDemo();
+} else {
+  updateProgress();
+}
+</script>
+</body>
+</html>
