@@ -10,8 +10,8 @@
 //      (If your variable is named something else, update the line below.)
 //   3. Deploy. The front-end posts the answers object to this function.
 
-const MODEL = 'claude-sonnet-4-6';   // change here if you rotate models
-const MAX_TOKENS = 4000;             // enough for 4 cards + synthesis
+const MODEL = 'claude-haiku-4-5-20251001';   // change here if you rotate models
+const MAX_TOKENS = 2000;             // enough for 4 cards + synthesis
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
